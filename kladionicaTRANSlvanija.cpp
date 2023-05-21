@@ -64,7 +64,7 @@ int main()
 }
      if (izbor == 4) {
          cout << "Odabrali ste Nogometne Utakmice:" << endl;
-         cout << "PRAVILA:"<<endl<<endl "Na poèetku izlaze dva nogometna kluba koje æe odigrati utakmicu." <<endl << "Odabrani klub je pobijedio - dupli dobitak uloga." << endl "U suprotnom (gubitak ili izjednaèeno) gubite svotu uloga.";
+         cout << "PRAVILA:"<<endl "Na poèetku izlaze dva nogometna kluba koje æe odigrati utakmicu." <<endl << "Odabrani klub je pobijedio - dupli dobitak uloga." << endl "U suprotnom (gubitak ili izjednaèeno) gubite svotu uloga.";
          int odabir_nogometni_tim;
          int real, bayern, FC, arsenal, PSG, chelsea, bayern, city, united, juv, pool;
         
