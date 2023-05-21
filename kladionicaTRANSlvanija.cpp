@@ -59,10 +59,7 @@ int main()
 
         }
         if (izbor == 3) {
-            cout << "Odabrali ste utrke èetveronožnih trèkala" << endl;
-            cout << "PRAVILA: Èetveronožna trèkala trèe s desna na lijevo." <<endl <<"Pobjednik je èetveronožno trèkalo koje prvo doðe do završne linije." << endl "Ako vaše èetveronožno trèkalo pobijedi dobitak je 1,5x vašeg uloga.";
-            cout << "Odaberite jedno Èetveronožno Trèkalo:";
-
+            
     }
 }
      if (izbor == 4) {
