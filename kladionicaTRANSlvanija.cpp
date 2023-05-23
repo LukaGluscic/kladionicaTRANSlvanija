@@ -31,6 +31,7 @@ int main()
         cout << "8. " << endl;
         cout << "vas odabir je: ";
         cin >> izbor;
+        cout << endl;
         if (izbor == 1)
         {
             cout << "Unesite vase ime i prezime " << endl;
@@ -64,7 +65,7 @@ int main()
 }
      if (izbor == 4) {
          cout << "Odabrali ste Nogometne Utakmice:" << endl;
-         cout << "PRAVILA:"<<endl "Na poèetku izlaze dva nogometna kluba koje æe odigrati utakmicu." <<endl << "Odabrani klub je pobijedio - dupli dobitak uloga." << endl "U suprotnom (gubitak ili izjednaèeno) gubite svotu uloga.";
+         cout << "PRAVILA:" << endl "Na poèetku izlaze dva nogometna kluba koje æe odigrati utakmicu." << endl << "Odabrani klub je pobijedio - dupli dobitak uloga." << endl << "U suprotnom (gubitak ili izjednaèeno) gubite svotu uloga." << endl;
          int odabir_nogometni_tim;
          int real, bayern, FC, arsenal, PSG, chelsea, bayern, city, united, juv, pool;
         
