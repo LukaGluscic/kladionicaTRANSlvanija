@@ -149,7 +149,144 @@ int main()
 }
      if (izbor == 4) {
          cout << "Odabrali ste Nogometne Utakmice:" << endl;
-         int odabir_nogometni_tim;
+         cout << "PRAVILA:" << endl << "Na pocetku izlaze dva nogometna kluba koje ce odigrati utakmicu." << endl << "Odabrani klub je pobijedio - dupli dobitak uloga." << endl << "U suprotnom (gubitak ili izjednaceno) gubite svotu uloga." << endl;
+         int Bir2;
+         do {
+             int bayern = 1, real = 2, FC = 3, PSG = 4, Chelsea = 5, Bayern = 6, City = 7, United = 8, Juv = 9, Pool = 10;
+             time_t rand_broj1 = time(NULL);
+             srand(rand_broj1);
+             time_t rand_broj2 = time(NULL);
+             srand(rand_broj2);
+             time_t rand_broj3 = time(NULL);
+             srand(rand_broj3);
+             int random_broj1 = (rand() % 10) + 1;
+             int random_broj2 = (rand() % 10) + 1;
+
+             int klub1 = random_broj1, klub2 = random_broj2;
+             if (klub1 == klub2) {
+                 klub2 += 1;
+             }
+             if (klub1 == 1)
+                 cout << endl << "Klub broj 1: Bayern" << endl;
+             if (klub1 == 2)
+                 cout << endl << "Klub broj 1: Real Madrid" << endl;
+             if (klub1 == 3)
+                 cout << endl << "Klub broj 1: FC Barcelona" << endl;
+             if (klub1 == 4)
+                 cout << endl << "Klub broj 1: PSG" << endl;
+             if (klub1 == 5)
+                 cout << endl << "Klub broj 1: Chelsea" << endl;
+             if (klub1 == 6)
+                 cout << endl << "Klub broj 1: Bayern" << endl;
+             if (klub1 == 7)
+                 cout << endl << "Klub broj 1: Manchester City" << endl;
+             if (klub1 == 8)
+                 cout << endl << "Klub broj 1: Manchester united" << endl;
+             if (klub1 == 9)
+                 cout << endl << "Klub broj 1: Juventus" << endl;
+             if (klub1 == 10)
+                 cout << endl << "Klub broj 1: Liverpool" << endl;
+
+
+             if (klub2 == 1)
+                 cout << endl << "Klub broj 2: Bayern" << endl << endl;
+             if (klub2 == 2)
+                 cout << endl << "Klub broj 2: Real Madrid" << endl << endl;
+             if (klub2 == 3)
+                 cout << endl << "Klub broj 2: FC Barcelona" << endl << endl;
+             if (klub2 == 4)
+                 cout << endl << "Klub broj 2: PSG" << endl << endl;
+             if (klub2 == 5)
+                 cout << endl << "Klub broj 2: Chelsea" << endl << endl;
+             if (klub2 == 6)
+                 cout << endl << "Klub broj 2: Bayern" << endl << endl;
+             if (klub2 == 7)
+                 cout << endl << "Klub broj 2: Manchester City" << endl << endl;
+             if (klub2 == 8)
+                 cout << endl << "Klub broj 2: Manchester united" << endl << endl;
+             if (klub2 == 9)
+                 cout << endl << "Klub broj 2: Juventus" << endl << endl;
+             if (klub2 == 10)
+                 cout << endl << "Klub broj 2: Liverpool" << endl << endl;
+
+             int odabir_nogo, oklada;
+
+             cout << "Odaberite klub: ";
+
+         odabir:
+             cin >> odabir_nogo;
+             if (odabir_nogo <= 0 || odabir_nogo > 2) {
+                 cout << "Pogresan odabir, pokusajte ponovni!" << endl << endl;
+                 goto odabir;
+             }
+         ulog1:
+             cout << endl << endl << "Ulog: ";
+             cin >> oklada;
+             if (oklada > balans) {
+                 cout << "Nemate toliko novca, vas balans: " << balans;
+                 goto ulog1;
+             }
+
+             cout << "Utakmica je u tijeku, pricekajte." << endl;
+
+
+             int rez1 = (rand() % 7) + 0;
+             int rez2 = (rand() % 7) + 0;
+
+             cout << endl << "Rezultat je: " << endl << endl;
+
+             cout << "[" << rez1 << "]" << " --- " << "[" << rez2 << "]";
+
+             if (odabir_nogo == 1 && rez1 > rez2) {
+                 cout << "Èestitamo, pobjedili ste!!" << endl;
+                 balans = balans + oklada * 1.5;
+                 cout << "Vaš balans: " << balans << endl;
+             }
+             else if (odabir_nogo == 2 && rez2 > 1) {
+                 cout << "Èestitamo, pobjedili ste!!" << endl;
+                 balans = balans + oklada * 1.5;
+                 cout << "Vaš balans: " << balans << endl;
+             }
+             else if (odabir_nogo == 1 && rez1 < rez2) {
+                 cout << "Izgubili ste.";
+                 balans = balans - oklada;
+                 cout << "Vaš balans: " << balans << endl;
+             }
+             else if (odabir_nogo == 2 && rez2 < rez1) {
+                 cout << "Izgubili ste!" << endl;
+                 balans = balans - oklada;
+                 cout << "Vaš balans: " << balans << endl;
+             }
+             else if (odabir_nogo == 2 && rez2 == rez1) {
+                 cout << "Izjednaèeno." << endl;
+                 balans = balans - oklada;
+                 cout << "Vaš balans: " << balans << endl;
+             }
+             else if (odabir_nogo == 1 && rez2 == rez1) {
+                 cout << "Izjednaèeno." << endl;
+                 balans = balans - oklada;
+                 cout << "Vaš balans: " << balans << endl;
+             }
+
+             if (balans <= 0) {
+                 cout << "Vas balans dosao je na 0." << endl << "Igra se zavrsava (isto ko vas jadan zivot)" << endl;
+             }
+             cout << endl << endl << "Za ponovno igranje pritisnite 1. Za prekid pritisnite 0" << endl;
+         odb2:
+             cin >> Bir2;
+             if (Bir2 != 1 && Bir2 != 0)
+             {
+                 cout << "Pogresan odabir, birajte ponovno!" << endl;
+                 goto odb2;
+                 if (Bir2 == 0)
+                     goto one;
+
+             }
+         } while (Bir2 == 1);
+         goto one;
+
+
+     }
         
      }
      if (izbor == 5) {
