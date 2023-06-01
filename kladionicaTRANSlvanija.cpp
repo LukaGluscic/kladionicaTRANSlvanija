@@ -190,7 +190,7 @@ int main()
     string grad;
     string odgovor;
     while (1) {
-        system("cls");
+
         cout << "Dobrodosli u kladionicu TRANSilvanija\n" << endl;
         cout << "1. Registracija" << endl;
         cout << "2. Stanje racuna" << endl;
@@ -301,6 +301,7 @@ int main()
             delete[] polje;
             delete[] brojevi;
         }
+        system("cls");
         if (izbor == 4)
         {
             double balans = 0.0;
