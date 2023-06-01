@@ -104,12 +104,6 @@ void prikaziRuku(const vector<Karta>& ruka, bool prikažiSveKarte = true) {
 }
 
 void blackjack() {
-    vector<Karta> špil = {
-        { "2", "♥" }, { "3", "♥" }, { "4", "♥" }, { "5", "♥" }, { "6", "♥" }, { "7", "♥" }, { "8", "♥" }, { "9", "♥" }, { "10", "♥" }, { "J", "♥" }, { "Q", "♥" }, { "K", "♥" }, { "A", "♥" },
-        { "2", "♦" }, { "3", "♦" }, { "4", "♦" }, { "5", "♦" }, { "6", "♦" }, { "7", "♦" }, { "8", "♦" }, { "9", "♦" }, { "10", "♦" }, { "J", "♦" }, { "Q", "♦" }, { "K", "♦" }, { "A", "♦" },
-        { "2", "♠" }, { "3", "♠" }, { "4", "♠" }, { "5", "♠" }, { "6", "♠" }, { "7", "♠" }, { "8", "♠" }, { "9", "♠" }, { "10", "♠" }, { "J", "♠" }, { "Q", "♠" }, { "K", "♠" }, { "A", "♠" },
-        { "2", "♣" }, { "3", "♣" }, { "4", "♣" }, { "5", "♣" }, { "6", "♣" }, { "7", "♣" }, { "8", "♣" }, { "9", "♣" }, { "10", "♣" }, { "J", "♣" }, { "Q", "♣" }, { "K", "♣" }, { "A", "♣" }
-    };
 
     pomiješajŠpil(špil);
 
@@ -190,7 +184,7 @@ int main()
     string grad;
     string odgovor;
     while (1) {
-
+        system("cls");
         cout << "Dobrodosli u kladionicu TRANSilvanija\n" << endl;
         cout << "1. Registracija" << endl;
         cout << "2. Stanje racuna" << endl;
@@ -199,7 +193,6 @@ int main()
         cout << "5. Utrke cetveronoznih trckala" << endl;
         cout << "6. Blackjack" << endl;
         cout << "7. Izlaz iz programa" << endl;
-        cout << "8. " << endl;
         cout << "Vas odabir je: ";
         cin >> izbor;
         cout << endl;
@@ -221,8 +214,8 @@ int main()
                 datoteka << "OIB: " << OIB << endl;
                 datoteka.close();
             }
-            }
-        
+        }
+
         if (izbor == 2)
         {
             for (int i = 0; i < brojOvisnika; i++)
@@ -339,7 +332,7 @@ int main()
             if (odabirIgre == 1) {
                 blackjack();
             }
-            else if (odabirIgre == 2) 
+            else if (odabirIgre == 2)
             {
                 cout << "Unesite ime datoteke za učitavanje: ";
                 string imeDatoteke;
@@ -351,15 +344,16 @@ int main()
                 else {
                     blackjack();
                 }
+            }
+            if (izbor == 7)
+            {
+                break;
+            }
         }
-        if (izbor == 7)
-        {
-            break;
-        }
+
+        delete[] Imeprezime1;
+        delete[] ulog;
+
+        return 0;
     }
-
-    delete[] Imeprezime1;
-    delete[] ulog;
-
-    return 0;
-}
+}   
