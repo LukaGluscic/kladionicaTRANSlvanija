@@ -1,3 +1,3 @@
-ImePrezime: Luka
-Grad: Gluscic
-OIB: 12
+ImePrezime: Luka Gluscic
+Grad: Samobor
+OIB: 88114552
