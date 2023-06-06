@@ -16,162 +16,6 @@ void pauza() {
     cin.ignore();
     getline(cin, dummy);
 }
-struct Karta {
-    string vrijednost;
-    string znak;
-};
-
-void podijeliKartu(vector<Karta>& špil, vector<Karta>& ruka) {
-    ruka.push_back(špil.back());
-    špil.pop_back();
-}
-
-void pomiješajŠpil(vector<Karta>& špil) {
-    random_device rd;
-    mt19937 gen(rd());
-    shuffle(špil.begin(), špil.end(), gen);
-}
-
-int izračunajVrijednostRuke(const vector<Karta>& ruka) {
-    int vrijednost = 0;
-    int brojAsova = 0;
-
-    for (const Karta& karta : ruka) {
-        if (karta.vrijednost == "A") {
-            vrijednost += 11;
-            brojAsova++;
-        }
-        else {
-            vrijednost += stoi(karta.vrijednost);
-        }
-    }
-
-    while (vrijednost > 21 && brojAsova > 0) {
-        vrijednost -= 10;
-        brojAsova--;
-    }
-
-    return vrijednost;
-}
-
-void spremanjeRukeUDatoteku(const vector<Karta>& ruka, const string& imeDatoteke) {
-    ofstream datoteka(imeDatoteke, ios::binary);
-    if (datoteka.is_open()) {
-        int brojKarata = ruka.size();
-        datoteka.write(reinterpret_cast<const char*>(&brojKarata), sizeof(int));
-        for (const Karta& karta : ruka) {
-            int vrijednostSize = karta.vrijednost.size();
-            datoteka.write(reinterpret_cast<const char*>(&vrijednostSize), sizeof(int));
-            datoteka.write(karta.vrijednost.c_str(), vrijednostSize);
-            int znakSize = karta.znak.size();
-            datoteka.write(reinterpret_cast<const char*>(&znakSize), sizeof(int));
-            datoteka.write(karta.znak.c_str(), znakSize);
-        }
-        datoteka.close();
-    }
-}
-
-vector<Karta> ucitavanjeRukeIzDatoteke(const string& imeDatoteke) {
-    vector<Karta> ruka;
-    ifstream datoteka(imeDatoteke, ios::binary);
-    if (datoteka.is_open()) {
-        int brojKarata;
-        datoteka.read(reinterpret_cast<char*>(&brojKarata), sizeof(int));
-        for (int i = 0; i < brojKarata; i++) {
-            int vrijednostSize;
-            datoteka.read(reinterpret_cast<char*>(&vrijednostSize), sizeof(int));
-            string vrijednost(vrijednostSize, '\0');
-            datoteka.read(&vrijednost[0], vrijednostSize);
-            int znakSize;
-            datoteka.read(reinterpret_cast<char*>(&znakSize), sizeof(int));
-            string znak(znakSize, '\0');
-            datoteka.read(&znak[0], znakSize);
-            Karta karta = { vrijednost, znak };
-            ruka.push_back(karta);
-        }
-        datoteka.close();
-    }
-    return ruka;
-}
-
-void prikaziRuku(const vector<Karta>& ruka, bool prikažiSveKarte = true) {
-    for (const Karta& karta : ruka) {
-        cout << karta.vrijednost << " " << karta.znak << endl;
-    }
-    if (!prikažiSveKarte) {
-        cout << "Ukupna vrijednost: " << izračunajVrijednostRuke(ruka) << endl;
-    }
-}
-
-void blackjack() {
-
-    pomiješajŠpil(špil);
-
-    vector<Karta> rukaIgraca;
-    vector<Karta> rukaDilera;
-
-    podijeliKartu(špil, rukaIgraca);
-    podijeliKartu(špil, rukaDilera);
-    podijeliKartu(špil, rukaIgraca);
-    podijeliKartu(špil, rukaDilera);
-
-    while (true) {
-        system("cls");
-        cout << "Ruka igrača:" << endl;
-        prikaziRuku(rukaIgraca);
-        cout << endl;
-        cout << "Ruka dilera:" << endl;
-        prikaziRuku(rukaDilera, false);
-        cout << endl;
-
-        cout << "Da li želite uzeti još jednu kartu? (da/ne): ";
-        string odgovor;
-        cin >> odgovor;
-
-        if (odgovor == "da") {
-            podijeliKartu(špil, rukaIgraca);
-            if (izračunajVrijednostRuke(rukaIgraca) > 21) {
-                cout << "Prešli ste 21. Gubite!" << endl;
-                pauza();
-                return;
-            }
-        }
-        else {
-            break;
-        }
-    }
-
-    while (izračunajVrijednostRuke(rukaDilera) < 17) {
-        podijeliKartu(špil, rukaDilera);
-        if (izračunajVrijednostRuke(rukaDilera) > 21) {
-            cout << "Diler je prešao 21. Pobjeđujete!" << endl;
-            pauza();
-            return;
-        }
-    }
-
-    cout << "Ruka igrača:" << endl;
-    prikaziRuku(rukaIgraca);
-    cout << endl;
-    cout << "Ruka dilera:" << endl;
-    prikaziRuku(rukaDilera);
-    cout << endl;
-
-    int vrijednostIgraca = izračunajVrijednostRuke(rukaIgraca);
-    int vrijednostDilera = izračunajVrijednostRuke(rukaDilera);
-
-    if (vrijednostIgraca > vrijednostDilera) {
-        cout << "Pobjeđujete!" << endl;
-    }
-    else if (vrijednostIgraca < vrijednostDilera) {
-        cout << "Gubite!" << endl;
-    }
-    else {
-        cout << "Neriješeno!" << endl;
-    }
-
-    pauza();
-}
 
 int main()
 {
@@ -191,7 +35,7 @@ int main()
         cout << "3. Loto" << endl;
         cout << "4. Nogometne utakmice" << endl;
         cout << "5. Utrke cetveronoznih trckala" << endl;
-        cout << "6. Blackjack" << endl;
+        cout << "6. Poker" << endl;
         cout << "7. Izlaz iz programa" << endl;
         cout << "Vas odabir je: ";
         cin >> izbor;
@@ -321,30 +165,47 @@ int main()
         }
         if (izbor == 6)
         {
-            cout << "Dobrodošli u igru Blackjack!" << endl;
-            cout << "Želite li početi novu igru ili učitati prethodno spremljenu igru?" << endl;
-            cout << "1. Nova igra" << endl;
-            cout << "2. Učitaj spremljenu igru" << endl;
-            cout << "Odabir: ";
-            int odabirIgre;
-            cin >> odabirIgre;
+            // Deklaracija i inicijalizacija špila karata
+            string karte[52] = {
+                "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A",
+                "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A",
+                "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A",
+                "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"
+            };
 
-            if (odabirIgre == 1) {
-                blackjack();
-            }
-            else if (odabirIgre == 2)
+            // Miješanje špila karata
+            random_device rd;
+            mt19937 gen(rd());
+            shuffle(karte, karte + 52, gen);
+
+            // Podjela karata igračima
+            const int brojIgraca = 4;
+            const int brojKarataPoIgracu = 5;
+            string ruka[brojIgraca][brojKarataPoIgracu];
+
+            for (int i = 0; i < brojKarataPoIgracu; i++)
             {
-                cout << "Unesite ime datoteke za učitavanje: ";
-                string imeDatoteke;
-                cin >> imeDatoteke;
-                vector<Karta> rukaIgraca = ucitavanjeRukeIzDatoteke(imeDatoteke);
-                if (rukaIgraca.empty()) {
-                    cout << "Neuspješno učitavanje igre iz datoteke." << endl;
-                }
-                else {
-                    blackjack();
+                for (int j = 0; j < brojIgraca; j++)
+                {
+                    ruka[j][i] = karte[i * brojIgraca + j];
                 }
             }
+
+            // Ispis podijeljenih karata
+            string imeIgraca[brojIgraca] = { "Igrac 1", "Igrac 2", "Igrac 3", "Igrac 4" };
+
+            for (int i = 0; i < brojIgraca; i++)
+            {
+                cout << imeIgraca[i] << ": ";
+                for (int j = 0; j < brojKarataPoIgracu; j++)
+                {
+                    cout << ruka[i][j] << " ";
+                }
+                cout << endl;
+            }
+
+            pauza(); // Pauza za prikaz podijeljenih karata
+        }
             if (izbor == 7)
             {
                 break;
@@ -356,4 +217,4 @@ int main()
 
         return 0;
     }
-}   
+  
