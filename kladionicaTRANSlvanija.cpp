@@ -85,6 +85,7 @@ int main()
             uniform_int_distribution<int> dis(1, 49);
             cout << "Unesite novac koji zelite uloziti u loto: " << endl;
             cin >> ulog1;
+            cout << "unesite 7 brojeva koji su u rasponu brojeva 1 - 49" << endl;
             if (ulog1 <= 0)
             {
                 cout << "Pogresan unos, ulog mora biti veci od 0." << endl;
