@@ -1,6 +1,5 @@
 ﻿#include<iostream>
 #include<cstdlib>
-#include<time.h>
 #include<algorithm>
 #include<string>
 #include<cctype>
@@ -8,6 +7,12 @@
 #include<vector>
 #include<random>
 #include<windows.h>
+#include<ctime>
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <windows.h>
+#include <fstream>
 using namespace std;
 
 void pauza() {
@@ -33,10 +38,9 @@ int main()
         cout << "1. Registracija" << endl;
         cout << "2. Stanje racuna" << endl;
         cout << "3. Loto" << endl;
-        cout << "4. Nogometne utakmice" << endl;
-        cout << "5. Utrke cetveronoznih trckala" << endl;
-        cout << "6. Poker" << endl;
-        cout << "7. Izlaz iz programa" << endl;
+        cout << "4. Utrke cetveronoznih trckala" << endl;
+        cout << "5. Slot masine" << endl;
+        cout << "6. Izlaz iz programa" << endl;
         cout << "Vas odabir je: ";
         cin >> izbor;
         cout << endl;
@@ -82,139 +86,210 @@ int main()
             int ulog1;
             random_device rd;
             mt19937 gen(rd());
-            uniform_int_distribution<int> dis(1, 49);
+            uniform_int_distribution<int> dis(1, 35);
             cout << "Unesite novac koji zelite uloziti u loto: " << endl;
             cin >> ulog1;
-            cout << "unesite 7 brojeva koji su u rasponu brojeva 1 - 49" << endl;
-            if (ulog1 <= 0)
-            {
+            cout << "Unesite 7 brojeva koji su u rasponu brojeva 1 - 35" << endl;
+
+            if (ulog1 <= 0) {
                 cout << "Pogresan unos, ulog mora biti veci od 0." << endl;
                 return 0;
             }
+
             int* polje = new int[7];
             int* brojevi = new int[7];
-            for (int i = 0; i < 7; i++)
-            {
+            for (int i = 0; i < 7; i++) {
                 cout << "Unesite " << i + 1 << ". broj: ";
                 cin >> polje[i];
-                if (polje[i] <= 0 || polje[i] > 49)
-                {
-                    cout << "Pogrešan unos, brojevi moraju biti u rasponu od 1 do 49." << endl;
-                    return 0;
+                // Provjera je li broj vec unesen
+                for (int j = 0; j < i; j++) {
+                    if (polje[i] == polje[j]) {
+                        cout << "Broj " << polje[i] << " je vec unesen. Molimo unesite drugi broj." << endl;
+                        i--; // Ponovno trazimo unos istog broja
+                        break;
+                    }
+                }
+                // Provjera je li broj u zadanom rasponu
+                if (polje[i] < 1 || polje[i] > 35) {
+                    cout << "Pogresan unos, brojevi moraju biti u rasponu od 1 do 35." << endl;
+                    i--; // Ponovno trazimo unos istog broja
+                    continue;
                 }
             }
             cout << "Vasi brojevi su: ";
-            for (int i = 0; i < 7; i++)
-            {
+            for (int i = 0; i < 7; i++) {
                 cout << polje[i] << " ";
             }
             cout << endl;
             cout << "Dobitni brojevi su: ";
-            for (int i = 0; i < 7; i++)
-            {
+            for (int i = 0; i < 7; i++) {
                 brojevi[i] = dis(gen);
                 cout << brojevi[i] << " ";
             }
             cout << endl;
             int brojac = 0;
-            for (int i = 0; i < 7; i++)
-            {
-                if (polje[i] == brojevi[i])
-                {
+            for (int i = 0; i < 7; i++) {
+                if (polje[i] == brojevi[i]) {
                     brojac++;
                 }
             }
-            if (brojac == 0)
-            {
+            if (brojac == 0) {
                 cout << "Nazalost, niste osvojili nista." << endl;
             }
-            else if (brojac == 7)
-            {
+            else if (brojac == 7) {
                 cout << "Cestitamo! Osvojili ste glavni dobitak!" << endl;
             }
-            else
-            {
+            else {
                 cout << "Cestitamo! Osvojili ste " << brojac << " pogodaka." << endl;
             }
+
             delete[] polje;
             delete[] brojevi;
         }
-        system("cls");
+        string str;
+        cin.ignore();
+        getline(cin, str);
         if (izbor == 4)
         {
-            double balans = 0.0;
-            cout << "Unesite iznos koji zelite uloziti na nogometnu utakmicu: " << endl;
-            cin >> balans;
-            if (balans <= 0)
-            {
-                cout << "Pogresan unos, iznos uloga mora biti veci od 0." << endl;
-                return 0;
-            }
-            // Ovdje dodajte logiku za nogometne utakmice
+            //slot masine
         }
         if (izbor == 5)
         {
-            double ulog2;
-            cout << "Unesite iznos koji želite uložiti na utrke četveronožnih trkača: " << endl;
-            cin >> ulog2;
-            if (ulog2 <= 0)
+            fstream file;
+            file.open("Povijest.txt", ios::app);
+            char c;
+            string g;
+            int z, t;
+            char polje[3][8] = { {'A','_', '_', '_', '_', '_', '_', 'g'},
+                                 {'B','_', '_', '_', '_', '_','_','f'},
+                                 {'C','_', '_', '_', '_','_','_', 'k'} };
+            cout << "Dobrodosli u utrke konja, unesite vase ime: ";
+            cin >> g;
+            system("cls");
+            cout << "Dobrodosli " << g << "\n";
+            cout << "Odaberite konja na kojega se kladite : \n"
+                << "                                                   A)\n"
+                << "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                                                    B)\n"
+                << "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                                                    C)\n\n"
+                << "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t    ";
+            cin >> c;
+            while (c != 'A' && c != 'B' && c != 'C')
             {
-                cout << "Pogrešan unos, iznos uloga mora biti veći od 0." << endl;
-                return 0;
+                cout << "Unesite valjanog konja: ";
+                cin >> c;
             }
-            // Ovdje dodajte logiku za utrke četveronožnih trkača
+            cout << "\n";
+            cout << "Unesite vas ulog : ";
+            cin >> z;
+            int x1 = 0, y1 = 0, x2 = 1, y2 = 0, x3 = 2, y3 = 0;
+            while ((polje[0][7] == 'g') && (polje[1][7] == 'f') && (polje[2][7] == 'k'))
+            {
+                int nasumicno;
+                Sleep(700);
+                srand(time(NULL));
+                nasumicno = rand() % 10;
+
+                if (nasumicno > 4)
+                {
+                    polje[x1][y1] = '_';
+                    polje[x1][y1 + 1] = 'A';
+                    y1++;
+                }
+
+                system("cls");
+                for (int i = 0; i < 3; i++)
+                {
+                    for (int j = 0; j < 8; j++)
+                        cout << polje[i][j];
+                    cout << "\n";
+                }
+
+                Sleep(700);
+                srand(time(NULL));
+                nasumicno = rand() % 10;
+
+                if (nasumicno > 4)
+                {
+                    polje[x2][y2] = '_';
+                    polje[x2][y2 + 1] = 'B';
+                    y2++;
+                }
+
+                system("cls");
+                for (int i = 0; i < 3; i++)
+                {
+                    for (int j = 0; j < 8; j++)
+                        cout << polje[i][j];
+                    cout << "\n";
+                }
+
+                Sleep(700);
+                srand(time(NULL));
+                nasumicno = rand() % 10;
+
+                if (nasumicno > 4)
+                {
+                    polje[x3][y3] = '_';
+                    polje[x3][y3 + 1] = 'C';
+                    y3++;
+                }
+
+                system("cls");
+                for (int i = 0; i < 3; i++)
+                {
+                    for (int j = 0; j < 8; j++)
+                        cout << polje[i][j];
+                    cout << "\n";
+                }
+            }
+            cout << "\n";
+            if (polje[0][7] == 'A' && c == 'A')
+            {
+                t = z * 3;
+                cout << "Cestitamo! Vas konj je pobijedio.\n";
+                cout << "Vas dobitak je: " << t << "\n";
+                file << g << " je uložio " << z << " i osvojio " << t << " s konjem A.\n";
+            }
+            else if (polje[0][7] == 'A' && c != 'A')
+            {
+                cout << "Izgubili ste, vise srece drugi put\n";
+                file << g << " je uložio " << z << " i izgubio s konjem A.\n";
+            }
+            else if (polje[1][7] == 'B' && c == 'B')
+            {
+                t = z * 2;
+                cout << "Cestitamo! Vas konj je pobijedio.\n";
+                cout << "Vas dobitak je: " << t << "\n";
+                file << g << " je uložio " << z << " i osvojio " << t << " s konjem B.\n";
+            }
+            else if (polje[1][7] == 'B' && c != 'B')
+            {
+                cout << "Izgubili ste, vise srece drugi put\n";
+                file << g << " je uložio " << z << " i izgubio s konjem B.\n";
+            }
+            else if (polje[2][7] == 'C' && c == 'C')
+            {
+                t = z * 2;
+                cout << "Cestitamo! Vas konj je pobijedio.\n";
+                cout << "Vas dobitak je: " << t << "\n";
+                file << g << " je uložio " << z << " i osvojio " << t << " s konjem C.\n";
+            }
+            else if (polje[2][7] == 'C' && c != 'C')
+            {
+                cout << "Izgubili ste, vise srece drugi put\n";
+                file << g << " je uložio " << z << " i izgubio s konjem C.\n";
+            }
+            file.close();
         }
+    
         if (izbor == 6)
         {
-            // Deklaracija i inicijalizacija špila karata
-            string karte[52] = {
-                "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A",
-                "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A",
-                "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A",
-                "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"
-            };
-
-            // Miješanje špila karata
-            random_device rd;
-            mt19937 gen(rd());
-            shuffle(karte, karte + 52, gen);
-
-            // Podjela karata igračima
-            const int brojIgraca = 4;
-            const int brojKarataPoIgracu = 5;
-            string ruka[brojIgraca][brojKarataPoIgracu];
-
-            for (int i = 0; i < brojKarataPoIgracu; i++)
-            {
-                for (int j = 0; j < brojIgraca; j++)
-                {
-                    ruka[j][i] = karte[i * brojIgraca + j];
-                }
-            }
-
-            // Ispis podijeljenih karata
-            string imeIgraca[brojIgraca] = { "Igrac 1", "Igrac 2", "Igrac 3", "Igrac 4" };
-
-            for (int i = 0; i < brojIgraca; i++)
-            {
-                cout << imeIgraca[i] << ": ";
-                for (int j = 0; j < brojKarataPoIgracu; j++)
-                {
-                    cout << ruka[i][j] << " ";
-                }
-                cout << endl;
-            }
-
-            pauza(); // Pauza za prikaz podijeljenih karata
+            cout << "Hvala vam, dodite nam opet! :3";
+            break;
         }
-            if (izbor == 7)
-            {
-                break;
-            }
+          
+            pauza();
         }
-
-        delete[] Imeprezime1;
-        delete[] ulog;
 
         return 0;
     }
