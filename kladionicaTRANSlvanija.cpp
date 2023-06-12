@@ -8,11 +8,8 @@
 #include<random>
 #include<windows.h>
 #include<ctime>
-#include <iostream>
-#include <cstdlib>
-#include <ctime>
-#include <windows.h>
-#include <fstream>
+#include <chrono>
+#include <thread>
 using namespace std;
 
 void pauza() {
@@ -38,8 +35,8 @@ int main()
         cout << "1. Registracija" << endl;
         cout << "2. Stanje racuna" << endl;
         cout << "3. Loto" << endl;
-        cout << "4. Utrke cetveronoznih trckala" << endl;
-        cout << "5. Slot masine" << endl;
+        cout << "4. Slot masine" << endl;
+        cout << "5. Utrke cetveronoznih trckala" << endl;
         cout << "6. Izlaz iz programa" << endl;
         cout << "Vas odabir je: ";
         cin >> izbor;
@@ -140,7 +137,7 @@ int main()
                 cout << "Cestitamo! Osvojili ste glavni dobitak!" << endl;
             }
             else {
-                cout << "Cestitamo! Osvojili ste " << brojac << " pogodaka." << endl;
+                cout << "Cestitamo! Pogodili ste " << brojac << " brojeva." << endl;
             }
 
             delete[] polje;
@@ -185,7 +182,7 @@ int main()
             while ((polje[0][7] == 'g') && (polje[1][7] == 'f') && (polje[2][7] == 'k'))
             {
                 int nasumicno;
-                Sleep(700);
+                this_thread::sleep_for(chrono::milliseconds(700));
                 srand(time(NULL));
                 nasumicno = rand() % 10;
 
@@ -204,7 +201,7 @@ int main()
                     cout << "\n";
                 }
 
-                Sleep(700);
+                this_thread::sleep_for(chrono::milliseconds(700));
                 srand(time(NULL));
                 nasumicno = rand() % 10;
 
@@ -223,7 +220,7 @@ int main()
                     cout << "\n";
                 }
 
-                Sleep(700);
+                this_thread::sleep_for(chrono::milliseconds(700));
                 srand(time(NULL));
                 nasumicno = rand() % 10;
 
@@ -281,14 +278,14 @@ int main()
             }
             file.close();
         }
-    
+        
         if (izbor == 6)
         {
             cout << "Hvala vam, dodite nam opet! :3";
             break;
         }
-          
-            pauza();
+        else
+            pauza();   
         }
 
         return 0;
